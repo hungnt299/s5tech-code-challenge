@@ -149,7 +149,7 @@ export default function App() {
               aria-expanded={modalSide === "in"}
             >
               <img
-                src={`/public/images/tokens/${symbolIn}.svg`}
+                src={`/images/tokens/${symbolIn}.svg`}
                 className="token-logo"
                 aria-hidden="true"
               ></img>
@@ -210,7 +210,7 @@ export default function App() {
               aria-expanded={modalSide === "out"}
             >
               <img
-                src={`/public/images/tokens/${symbolOut}.svg`}
+                src={`/images/tokens/${symbolOut}.svg`}
                 className="token-logo"
                 aria-hidden="true"
               ></img>

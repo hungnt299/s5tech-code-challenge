@@ -88,7 +88,7 @@ export default function TokenModal({
               >
                 <span className="token-meta">
                   <img
-                    src={`/public/images/tokens/${t.currency}.svg`}
+                    src={`/images/tokens/${t.currency}.svg`}
                     className="token-logo"
                     aria-hidden="true"
                     width={24}
