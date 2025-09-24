@@ -1,11 +1,5 @@
 "use strict";
 
-/**
- * Sum integers from 1 to n (inclusive).
- * Assumes the mathematical series result is <= Number.MAX_SAFE_INTEGER.
- * For n <= 0, returns 0.
- */
-
 // Implementation A: classic iterative for-loop accumulation.
 var sum_to_n_a = function (n) {
   if (!Number.isInteger(n) || n <= 0) return 0;

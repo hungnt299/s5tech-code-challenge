@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   GLOBAL STYLES
+   ========================================================================== */
+
+body {
+  @apply min-w-[360px] min-h-dvh flex items-center justify-center bg-bg-primary text-text-primary font-sans;
+  /* Keep scrollbar space stable across the app */
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Global scrollbar styling */
+* {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.scrollbar") transparent;
+
+  &::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-scrollbar rounded-full border-2 border-transparent;
+    background-clip: padding-box;
+
+    &:hover {
+      @apply bg-scrollbar-hover;
+    }
+  }
+
+  &::-webkit-scrollbar-corner {
+    @apply bg-transparent;
+  }
+}
+
+/* ==========================================================================
+   APP LAYOUT
+   ========================================================================== */
+
+.app {
+  @apply w-[360px] bg-bg-app rounded-xl p-4 relative;
+  box-shadow: 0 8px 30px theme("colors.shadow-app"),
+    inset 0 0 0 1px theme("colors.border-panel");
+}
+
+.app-header {
+  @apply flex items-center justify-between mb-4;
+}
+
+/* ==========================================================================
+   NAVIGATION & TABS
+   ========================================================================== */
+
+.tabs {
+  @apply flex gap-2;
+}
+
+.tab {
+  @apply bg-transparent text-text-secondary rounded-lg px-2.5 py-2;
+
+  &.active {
+    @apply bg-primary text-bg-primary font-semibold;
+  }
+}
+
+.actions {
+  @apply flex gap-2;
+}
+
+.icon-btn {
+  @apply bg-bg-button text-text-secondary rounded-lg px-2 py-1 hover:opacity-80 transition-all;
+}
+
+/* ==========================================================================
+   MAIN CONTENT
+   ========================================================================== */
+
+main {
+  @apply flex flex-col gap-3;
+}
+
+.panel {
+  @apply bg-bg-panel rounded-xl p-4;
+  box-shadow: inset 0 0 0 1px theme("colors.border-panel");
+}
+
+.panel-row {
+  @apply flex justify-between items-center mb-2;
+}
+
+.label-col {
+  @apply flex gap-3 items-baseline justify-between w-full;
+}
+
+.muted {
+  @apply text-text-muted text-xs;
+}
+
+.mini {
+  @apply text-xs;
+}
+
+.balance strong {
+  @apply text-text-balance;
+}
+
+/* ==========================================================================
+   AMOUNT INPUT
+   ========================================================================== */
+
+.amount-row {
+  @apply flex items-center gap-2 w-full;
+
+  input {
+    @apply bg-transparent outline-none text-text-input text-2xl font-semibold flex-1 min-w-0;
+    caret-color: theme("colors.text-input");
+
+    &::placeholder {
+      @apply text-text-balance;
+    }
+  }
+}
+
+/* ==========================================================================
+   TOKEN SELECTION
+   ========================================================================== */
+
+.token-select {
+  @apply inline-flex items-center gap-2 bg-bg-input text-text-primary p-2 rounded-full shrink-0;
+}
+
+.token-logo {
+  @apply w-6 h-6;
+}
+
+.token-symbol {
+  @apply font-semibold tracking-wide text-sm;
+}
+
+.caret {
+  @apply text-text-muted;
+}
+
+.token-meta {
+  @apply flex items-center gap-2;
+}
+
+/* ==========================================================================
+   PERCENTAGE BUTTONS
+   ========================================================================== */
+
+.percent-row {
+  @apply grid grid-cols-5 gap-2 mt-2.5;
+}
+
+.pct {
+  @apply bg-bg-input text-text-balance rounded-lg py-2 text-xs;
+
+  &:focus,
+  &:hover {
+    @apply outline-0 bg-bg-modal-input;
+  }
+}
+
+/* ==========================================================================
+   SWAP DIVIDER
+   ========================================================================== */
+
+.swap-divider {
+  @apply bg-primary text-black px-2 py-1 w-10 h-10 rounded-full mx-auto cursor-pointer transition-transform hover:opacity-80;
+
+  &:active {
+    transform: rotate(180deg) scale(0.96);
+  }
+}
+
+/* ==========================================================================
+   RATE & BUTTONS
+   ========================================================================== */
+
+.rate {
+  @apply text-center mt-0.5;
+}
+
+.primary {
+  @apply w-full bg-primary text-bg-primary rounded-lg font-bold py-3 mt-1 hover:opacity-80 transition-all flex justify-center items-center;
+
+  &:disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
+}
+
+/* ==========================================================================
+   LOADING SPINNER
+   ========================================================================== */
+
+.spinner {
+  @apply h-6 w-6 rounded-full border-2 border-gray-200 border-t-gray-700 inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   MODAL STYLES
+   ========================================================================== */
+
+.modal {
+  @apply fixed inset-0 hidden items-center justify-center;
+  background: rgba(0, 0, 0, 0.6);
+
+  &[aria-hidden="false"] {
+    @apply flex;
+  }
+}
+
+.modal-card {
+  @apply w-[378px] h-[490px] bg-bg-modal text-text-primary rounded-lg p-3;
+  box-shadow: 0 12px 40px theme("colors.shadow-modal");
+}
+
+.modal-head {
+  @apply flex items-center justify-between mb-2;
+}
+
+#token-search {
+  @apply w-full bg-bg-modal-input text-text-input border border-border-modal rounded-lg p-2 mb-3;
+}
+
+.token-list {
+  @apply grid gap-2 overflow-auto h-auto max-h-[360px];
+
+  &.token-empty {
+    @apply grid place-items-center text-center text-text-muted;
+    height: 100%;
+  }
+
+  /* Modal scrollbar styling */
+  &::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-text-balance rounded-lg;
+  }
+
+  /* Firefox */
+  scrollbar-color: theme("colors.scrollbar") transparent;
+  scrollbar-width: thin;
+}
+
+.token-empty {
+  @apply grid place-items-center text-center text-text-muted h-full;
+}
+
+.token-item {
+  @apply flex items-center justify-between bg-bg-token p-2 rounded-lg cursor-pointer border border-border-modal min-h-[46px];
+
+  &:hover {
+    @apply bg-bg-token-hover;
+  }
+
+  &.is-active {
+    @apply border-primary text-primary;
+
+    .token-symbol-strong,
+    .token-price,
+    .token-balance {
+      @apply text-primary;
+    }
+  }
+}
+
+.token-symbol-strong {
+  @apply text-text-token text-sm font-semibold;
+}
+
+.token-price {
+  @apply text-text-token text-xs;
+}
+
+.token-right {
+  @apply flex flex-col items-end leading-tight gap-0.5;
+}
+
+.token-balance {
+  @apply text-text-muted text-[11px];
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (min-width: 420px) {
+  .app {
+    @apply w-[380px];
+  }
+}
